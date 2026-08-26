@@ -176,6 +176,51 @@ function SkillVisual({ variant, id }: { variant: number; id: string }) {
   );
 }
 
+function DocumentSorter() {
+  return (
+    <div className="sorter-scene" role="img" aria-label="一台长出两只手的电脑，循环拿起、戳齐并归档一沓求职材料">
+      <div className="sorter-aura" aria-hidden="true" />
+      <div className="sorter-computer" aria-hidden="true">
+        <div className="sorter-monitor">
+          <div className="sorter-screen">
+            <div className="screen-toolbar">
+              <span>OFFERLOOP DESK</span>
+              <i /><i /><i />
+            </div>
+            <div className="screen-heading">
+              <span>CAREER MATERIALS</span>
+              <strong>持续整理中</strong>
+            </div>
+            <div className="file-queue">
+              <div><i>CV</i><span><b>定制简历.pdf</b><small>已核对事实</small></span><em>READY</em></div>
+              <div><i>ASR</i><span><b>真实面试复盘</b><small>正在归档</small></span><em>SYNC</em></div>
+              <div><i>JD</i><span><b>岗位准备材料</b><small>等待下一步</small></span><em>NEXT</em></div>
+            </div>
+            <div className="sort-progress"><span /><small>整理 · 对齐 · 回流</small></div>
+          </div>
+        </div>
+        <div className="sorter-neck" />
+        <div className="sorter-foot" />
+      </div>
+
+      <div className="paper-stack paper-source" aria-hidden="true"><i /><i /><i /><span>INBOX</span></div>
+      <div className="paper-stack paper-sorted" aria-hidden="true"><i /><i /><i /><span>SORTED</span></div>
+      <div className="paper-bundle" aria-hidden="true"><i /><i /><i /><b>PROFILE · CV · REVIEW</b></div>
+
+      <div className="sorter-arm arm-left" aria-hidden="true">
+        <div className="arm-cuff" /><div className="arm-tube" />
+        <div className="sorter-hand"><span /><span /><span /><span /><i /></div>
+      </div>
+      <div className="sorter-arm arm-right" aria-hidden="true">
+        <div className="arm-cuff" /><div className="arm-tube" />
+        <div className="sorter-hand"><span /><span /><span /><span /><i /></div>
+      </div>
+      <div className="tap-lines" aria-hidden="true"><i /><i /><i /></div>
+      <p className="sorter-caption"><span>LOOP 03</span> 拿起 · 对齐 · 归档 · 再次回流</p>
+    </div>
+  );
+}
+
 export default function Home() {
   const [loopIndex, setLoopIndex] = useState(0);
   const [pathIndex, setPathIndex] = useState(0);
@@ -225,7 +270,7 @@ export default function Home() {
     <main>
       <header className={`site-nav ${scrolled ? 'nav-scrolled' : ''}`} aria-label="主导航">
         <a className="wordmark" href="#top" aria-label="OfferLoop 首页">
-          <span className="wordmark-mark" aria-hidden="true" />
+          <Image className="nav-brand-logo" src="/offerloop-logo.webp" width={746} height={746} priority alt="" />
           <span>OfferLoop</span>
         </a>
         <nav className="nav-links" aria-label="页面导航">
@@ -239,9 +284,6 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="hero-orbit" aria-hidden="true" />
         <div className="hero-inner">
-          <div className="hero-logo-wrap">
-            <Image className="hero-logo" src="/offerloop-logo.webp" width={746} height={746} priority alt="OfferLoop 蓝紫玻璃质感三维标志" />
-          </div>
           <div className="hero-copy">
             <p className="eyebrow">9 SKILLS · 3 LOOPS · 1 CAREER SYSTEM</p>
             <h1>
@@ -254,6 +296,7 @@ export default function Home() {
               <a className="text-link" href="#skills">认识 9 个 Skill <span aria-hidden="true">↓</span></a>
             </div>
           </div>
+          <DocumentSorter />
         </div>
         <div className="hero-rule" />
       </section>
