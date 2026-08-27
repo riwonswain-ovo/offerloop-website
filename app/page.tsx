@@ -93,7 +93,6 @@ const realUseGroups = [
     title: '从发现岗位，到看清每一步进展。',
     description: '把分散的招聘机会整理成清单，再把投递、笔试和面试接到同一条进度线上。',
     images: [
-      { src: '/real-use/opportunity-progress-composite.png', alt: '脱敏后的求职企业清单与求职进展组合界面', fit: 'cover' },
       { src: '/real-use/company-list-anonymized.png', alt: '脱敏后的求职企业清单', fit: 'cover' },
       { src: '/real-use/progress-anonymized.png', alt: '脱敏后的求职进展表格', fit: 'cover' },
     ],
@@ -701,11 +700,11 @@ export default function Home() {
               <p>{group.description}</p>
               <small>真实使用界面 · 内容已脱敏</small>
             </div>
-            <div className={`real-use-gallery ${group.images.length === 2 ? 'is-pair' : ''}`}>
+            <div className="real-use-gallery" data-count={group.images.length}>
               {group.images.map((item, imageIndex) => (
                 <button
                   type="button"
-                  className={`real-use-shot ${imageIndex === 0 ? 'is-primary' : ''}`}
+                  className="real-use-shot"
                   data-fit={item.fit}
                   onClick={() => setLightboxImage(item)}
                   aria-label={`放大查看：${item.alt}`}
