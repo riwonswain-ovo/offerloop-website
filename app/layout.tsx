@@ -6,11 +6,11 @@ const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'OfferLoop — 把求职变成闭环',
-  description: '由 9 个 Agent Skill 组成的开源 AI 求职系统。',
+  title: 'OfferLoop — 让求职真正形成闭环',
+  description: '7 个 AI 求职 Skill 协同工作，从发现机会、定制简历到面试准备与真面复盘，让每一步都能持续积累。',
   icons: {
-    icon: '/icon.png',
-    apple: '/icon.png',
+    icon: '/offerloop-logo-transparent.png',
+    apple: '/offerloop-logo-transparent.png',
   },
 };
 
