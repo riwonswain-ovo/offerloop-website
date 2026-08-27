@@ -85,6 +85,66 @@ const faqs = [
   ['OfferLoop 是免费和开源的吗？', '是。OfferLoop 使用 MIT License 开源，你可以在 GitHub 查看项目、安装说明和源代码。'],
 ];
 
+const realUseGroups = [
+  {
+    id: 'opportunity',
+    label: '机会与进展',
+    eyebrow: 'JOB COLLECTION · RECRUITING REMINDER',
+    title: '从发现岗位，到看清每一步进展。',
+    description: '把分散的招聘机会整理成清单，再把投递、笔试和面试接到同一条进度线上。',
+    images: [
+      { src: '/real-use/opportunity-progress-composite.png', alt: '脱敏后的求职企业清单与求职进展组合界面', fit: 'cover' },
+      { src: '/real-use/company-list-anonymized.png', alt: '脱敏后的求职企业清单', fit: 'cover' },
+      { src: '/real-use/progress-anonymized.png', alt: '脱敏后的求职进展表格', fit: 'cover' },
+    ],
+  },
+  {
+    id: 'workspace',
+    label: '求职工作区',
+    eyebrow: 'FEISHU WORKSPACE',
+    title: '岗位、安排和材料，都在一个工作区里。',
+    description: '你可以随时打开、查看和修改；不同 Skill 也会读取同一份最新资料，继续往下做。',
+    images: [
+      { src: '/real-use/usage-guide-anonymized.png', alt: '脱敏后的 OfferLoop 使用指南', fit: 'cover' },
+      { src: '/real-use/interview-center-anonymized.png', alt: '脱敏后的笔面试中心', fit: 'cover' },
+    ],
+  },
+  {
+    id: 'materials',
+    label: '经历与简历',
+    eyebrow: 'EXPERIENCE · RESUME',
+    title: '经历被问清楚，简历才有真正可用的素材。',
+    description: '从项目细节、逐字表达，到面向目标岗位的简历，每份材料都能追溯到真实经历。',
+    images: [
+      { src: '/real-use/experience-detail-anonymized.png', alt: '脱敏后的经历复原稿', fit: 'cover' },
+      { src: '/real-use/experience-transcript-anonymized.png', alt: '脱敏后的经历面试逐字稿', fit: 'cover' },
+      { src: '/real-use/resume-anonymized.png', alt: '脱敏后的无照片定制简历', fit: 'contain' },
+    ],
+  },
+  {
+    id: 'practice',
+    label: '准备与模拟',
+    eyebrow: 'PREP · MOCK',
+    title: '先准备，再用一场模拟把问题暴露出来。',
+    description: '围绕公司、岗位和轮次组织准备材料，再通过逐题演练找到表达和证据上的缺口。',
+    images: [
+      { src: '/real-use/interview-prep-anonymized.png', alt: '脱敏后的面试准备文档', fit: 'cover' },
+      { src: '/real-use/mock-interview-anonymized.png', alt: '脱敏后的模拟面试记录', fit: 'cover' },
+    ],
+  },
+  {
+    id: 'review',
+    label: '真面复盘',
+    eyebrow: 'TALK REVIEW',
+    title: '同一场面试，从两个视角找到下一步。',
+    description: '既复盘自己的表达与准备，也模拟招聘者如何看待证据、能力与风险，让经验回到下一轮行动。',
+    images: [
+      { src: '/real-use/candidate-review-anonymized.png', alt: '脱敏后的求职者视角面试复盘', fit: 'cover' },
+      { src: '/real-use/recruiter-review-anonymized.png', alt: '脱敏后的招聘者视角评估', fit: 'cover' },
+    ],
+  },
+];
+
 function DotField({ className = '' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -471,6 +531,8 @@ function FeishuWorkspace() {
 export default function Home() {
   const [copied, setCopied] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [realUseTab, setRealUseTab] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; fit: string } | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -488,6 +550,19 @@ export default function Home() {
       revealObserver.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (!lightboxImage) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLightboxImage(null);
+    };
+    document.body.classList.add('has-lightbox');
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.classList.remove('has-lightbox');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [lightboxImage]);
 
   const copyCommand = async (command: string, index: number) => {
     try {
@@ -587,6 +662,64 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="real-use-section feature-section" id="real-use" aria-labelledby="real-use-heading">
+        <div className="real-use-heading" data-reveal>
+          <span className="section-label">REAL WORK · ANONYMIZED</span>
+          <h2 id="real-use-heading"><span>来自真实使用的 OfferLoop。</span><span className="muted-line">每一份材料，都在为下一步积累。</span></h2>
+          <p>以下界面来自真实求职流程。所有姓名、学校、公司、项目、联系方式、日期与数据均已替换为虚构内容。</p>
+        </div>
+
+        <div className="real-use-tabs" role="tablist" aria-label="真实使用素材分类">
+          {realUseGroups.map((group, index) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={realUseTab === index}
+              aria-controls={`real-use-panel-${group.id}`}
+              id={`real-use-tab-${group.id}`}
+              className={realUseTab === index ? 'is-active' : ''}
+              onClick={() => setRealUseTab(index)}
+              key={group.id}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>{group.label}
+            </button>
+          ))}
+        </div>
+
+        {realUseGroups.map((group, index) => (
+          <div
+            className={`real-use-panel ${realUseTab === index ? 'is-active' : ''}`}
+            id={`real-use-panel-${group.id}`}
+            role="tabpanel"
+            aria-labelledby={`real-use-tab-${group.id}`}
+            hidden={realUseTab !== index}
+            key={group.id}
+          >
+            <div className="real-use-copy">
+              <span>{group.eyebrow}</span>
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+              <small>真实使用界面 · 内容已脱敏</small>
+            </div>
+            <div className={`real-use-gallery ${group.images.length === 2 ? 'is-pair' : ''}`}>
+              {group.images.map((item, imageIndex) => (
+                <button
+                  type="button"
+                  className={`real-use-shot ${imageIndex === 0 ? 'is-primary' : ''}`}
+                  data-fit={item.fit}
+                  onClick={() => setLightboxImage(item)}
+                  aria-label={`放大查看：${item.alt}`}
+                  key={item.src}
+                >
+                  <Image src={item.src} alt={item.alt} fill sizes="(max-width: 700px) 94vw, 72vw" />
+                  <span aria-hidden="true">↗</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
       <section className="install-section feature-section" id="install">
         <div className="section-heading centered" data-reveal>
           <span className="section-label">OPEN SOURCE · MIT LICENSE</span>
@@ -635,6 +768,22 @@ export default function Home() {
           <a className="footer-github" href={GITHUB_URL} target="_blank" rel="noreferrer">OPEN SOURCE</a>
         </div>
       </footer>
+
+      {lightboxImage && (
+        <div
+          className="real-use-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightboxImage.alt}
+          onMouseDown={(event) => event.target === event.currentTarget && setLightboxImage(null)}
+        >
+          <button type="button" className="lightbox-close" onClick={() => setLightboxImage(null)} aria-label="关闭大图">×</button>
+          <div className="lightbox-frame" data-fit={lightboxImage.fit}>
+            <Image src={lightboxImage.src} alt={lightboxImage.alt} fill sizes="96vw" priority />
+          </div>
+          <p>真实使用界面 · 内容已脱敏</p>
+        </div>
+      )}
     </main>
   );
 }

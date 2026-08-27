@@ -27,6 +27,12 @@ The following media files are included for use on the official OfferLoop website
 
 Reuse or redistribution of these media files outside the OfferLoop website requires separate permission from the project maintainers.
 
+## Anonymized real-use gallery
+
+Files under `public/real-use/` are privacy-safe reconstructions of OfferLoop usage screens. Names, schools, employers, projects, links, dates, metrics and interview details shown in these images are fictional and do not describe a real person or organization.
+
+The gallery includes opportunity and progress tables, a workspace guide, interview scheduling, experience materials, preparation and mock-interview records, dual-perspective interview reviews, and a no-photo example resume. These assets are provided only as website demonstration media; they must not be presented as the records or endorsement of any real candidate or company.
+
 ## Questions
 
 If you are unsure whether a proposed use is permitted, open an issue in this repository before reusing the relevant brand or media asset.
