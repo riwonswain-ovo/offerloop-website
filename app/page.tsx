@@ -688,6 +688,7 @@ export default function Home() {
         {realUseGroups.map((group, index) => (
           <div
             className={`real-use-panel ${realUseTab === index ? 'is-active' : ''}`}
+            data-count={group.images.length}
             id={`real-use-panel-${group.id}`}
             role="tabpanel"
             aria-labelledby={`real-use-tab-${group.id}`}
