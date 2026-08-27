@@ -110,8 +110,8 @@ vite.config.ts     Vinext / Sites 本地构建配置
 
 OfferLoop 名称、Logo 与官网原创视觉素材属于项目品牌资产。飞书名称、商标及 App 图标属于其相应权利人，本网站仅用于说明 OfferLoop 的飞书集成能力。
 
-公开访问本仓库不代表第三方品牌素材自动获得与项目源码相同的使用许可；复用或再发布相关素材前，请先确认对应授权范围。
+公开访问本仓库不代表品牌与第三方素材自动获得和项目源码相同的使用许可。具体范围请查看 [`ASSETS.md`](./ASSETS.md)。
 
 ## License
 
-OfferLoop 核心项目采用 [MIT License](https://github.com/riwonswain-ovo/OfferLoop/blob/main/LICENSE)。官网源码与品牌素材的许可将以本仓库后续加入的 License 和素材说明文件为准。
+官网源代码采用 [MIT License](./LICENSE)。OfferLoop 核心项目同样采用 [MIT License](https://github.com/riwonswain-ovo/OfferLoop/blob/main/LICENSE)。品牌、第三方标识和网站媒体素材不自动包含在源码许可中，详细说明见 [`ASSETS.md`](./ASSETS.md)。
