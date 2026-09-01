@@ -325,6 +325,27 @@ function SkillFlowMap() {
         <button type="button" className="flow-reset" onClick={() => setZoom(0.88)} aria-label="重置流程图缩放">↺</button>
       </div>
 
+      <ol className="flow-mobile-list" aria-label="OfferLoop 求职流程">
+        {flowNodes.map((node, index) => (
+          <li key={node.id}>
+            <button
+              className={`flow-mobile-node ${activeSkill === node.id ? 'is-active' : ''}`}
+              data-tone={node.tone}
+              type="button"
+              aria-pressed={activeSkill === node.id}
+              onClick={() => setActiveSkill(node.id)}
+            >
+              <span className="flow-mobile-index">{String(index + 1).padStart(2, '0')}</span>
+              <span className="flow-mobile-copy">
+                <strong>{node.name}</strong>
+                <small>{node.label}</small>
+              </span>
+              <span className="flow-mobile-output"><em>完成后得到</em>{node.output}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+
       <div className="flow-viewport" ref={viewportRef}>
         <div className="flow-canvas" style={{ transform: `scale(${zoom})` }}>
           <svg className="flow-connectors" viewBox="0 0 1440 1140" aria-hidden="true">
@@ -600,7 +621,7 @@ export default function Home() {
           <a href="#skills">7 个 Skill</a>
           <a href="#install">安装</a>
         </nav>
-        <a className="button button-small" href={GITHUB_URL} target="_blank" rel="noreferrer">前往 GitHub</a>
+        <a className="button button-small nav-github" href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       </header>
 
       <section className="hero" id="top">
@@ -702,7 +723,7 @@ export default function Home() {
               <small>真实使用界面 · 内容已脱敏</small>
             </div>
             <div className="real-use-gallery" data-count={group.images.length}>
-              {group.images.map((item, imageIndex) => (
+              {group.images.map((item) => (
                 <button
                   type="button"
                   className="real-use-shot"
